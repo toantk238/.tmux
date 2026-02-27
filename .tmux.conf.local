@@ -530,7 +530,7 @@ set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
 
 bind-key "T" run-shell "sesh connect \"$(
-  sesh list --icons | fzf-tmux -p 80%,70% \
+  sesh list -t --icons | fzf-tmux -p 80%,70% \
     --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
     --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
     --bind 'tab:down,btab:up' \
@@ -543,3 +543,6 @@ bind-key "T" run-shell "sesh connect \"$(
     --preview-window 'right:55%' \
     --preview 'sesh preview {}'
 )\""
+
+bind-key x kill-pane # skip "kill-pane 1? (y/n)" prompt
+set -g detach-on-destroy off  # don't exit from tmux when closing a session
